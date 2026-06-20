@@ -1,1 +1,1272 @@
-.
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Too See — Ukubona LLC Roundtable</title>
+
+<meta property="og:title" content="Too See — Ukubona LLC Roundtable" />
+<meta property="og:description" content="The full season: SNAP · VₐF · Enaj · FastAPI Jacobian · T517 · Beta. Five voices, one Shakespearean question, and the architecture that answered it." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://abikesa.github.io/logos/assets/ukubona-light.png" />
+
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" />
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image" />
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg0:       #0f0f0f;
+  --bg1:       #171717;
+  --bg2:       #1f1f1f;
+  --bg3:       #2a2a2a;
+  --border:    rgba(255,255,255,0.08);
+  --border-md: rgba(255,255,255,0.14);
+  --text0:     #f2f0eb;
+  --text1:     #b8b4aa;
+  --text2:     #6e6a62;
+  --accent:    #7f77dd;
+  --accent-d:  rgba(127,119,221,0.18);
+  --accent-b:  rgba(127,119,221,0.35);
+  --coral:     #d85a30;
+  --coral-d:   rgba(216,90,48,0.14);
+  --coral-b:   rgba(216,90,48,0.35);
+  --teal:      #1d9e75;
+  --teal-d:    rgba(29,158,117,0.14);
+  --amber:     #c8841a;
+  --amber-d:   rgba(200,132,26,0.14);
+  /* voice colors */
+  --xai:       #E5534B;
+  --google:    #4285F4;
+  --openai:    #9a9890;
+  --claude:    #D97757;
+  --ukubona:   #7B3FA0;
+  --serif:     'DM Serif Display', Georgia, serif;
+  --sans:      'DM Sans', system-ui, sans-serif;
+  --mono:      'DM Mono', 'Fira Mono', monospace;
+  --max:       780px;
+  --radius:    8px;
+  --radius-lg: 14px;
+}
+[data-theme="light"] {
+  --bg0:       #f5f3ee;
+  --bg1:       #ffffff;
+  --bg2:       #f0ede6;
+  --bg3:       #e8e4db;
+  --border:    rgba(0,0,0,0.07);
+  --border-md: rgba(0,0,0,0.13);
+  --text0:     #1a1916;
+  --text1:     #4a4740;
+  --text2:     #8a8680;
+  --accent:    #534ab7;
+  --accent-d:  rgba(83,74,183,0.10);
+  --accent-b:  rgba(83,74,183,0.30);
+  --coral:     #993c1d;
+  --coral-d:   rgba(153,60,29,0.10);
+  --coral-b:   rgba(153,60,29,0.28);
+  --teal:      #0f6e56;
+  --teal-d:    rgba(15,110,86,0.10);
+  --amber:     #854f0b;
+  --amber-d:   rgba(133,79,11,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--bg0);
+  color: var(--text0);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.logo-wrap { width: 32px; height: 32px; flex-shrink: 0; position: relative; }
+.logo-wrap img {
+  width: 100%; height: 100%; object-fit: contain;
+  position: absolute; top: 0; left: 0;
+  transition: opacity 0.35s;
+  animation: spin 120s linear infinite;
+}
+.logo-dark { opacity: 1; }
+.logo-light { opacity: 0; }
+[data-theme="light"] .logo-dark { opacity: 0; }
+[data-theme="light"] .logo-light { opacity: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .logo-wrap img { animation: none; } }
+
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--text0);
+  flex: 1;
+  min-width: 0;
+}
+.nav-sub {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+  margin-left: 0.5rem;
+}
+.theme-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border-md);
+  border-radius: 20px;
+  padding: 0.28rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--text1);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--bg3); color: var(--text0); }
+
+/* ── JUMP NAV ── */
+.jump-nav {
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.jump-nav::-webkit-scrollbar { display: none; }
+.jump-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0;
+}
+.jump-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.6rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.jump-btn:hover { color: var(--text1); }
+.jump-btn.active { color: var(--text0); border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.outer { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── HERO ── */
+.hero {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text0);
+  margin-bottom: 1rem;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-lede {
+  font-size: 1.05rem;
+  color: var(--text1);
+  max-width: 56ch;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+.hero-eq {
+  font-family: var(--mono);
+  font-size: clamp(0.78rem, 2vw, 1rem);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-b);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.9rem 1.2rem;
+  color: var(--text0);
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  line-height: 1.9;
+}
+.hero-eq-note {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+.voice-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+}
+.vchip { display: inline-flex; align-items: center; gap: 6px; }
+.vdot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+/* ── SECTIONS ── */
+.rt-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+.section-head {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.12;
+  color: var(--text0);
+  margin-bottom: 1.2rem;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.prose { color: var(--text1); font-size: 0.95rem; line-height: 1.75; }
+.prose p { margin-bottom: 0.9rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text0); font-weight: 500; }
+.prose em { color: var(--text1); font-style: italic; }
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  color: var(--accent);
+}
+
+/* ── CODE BLOCK ── */
+.eq {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: var(--bg2);
+  border-left: 3px solid var(--accent-b);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  color: var(--text0);
+  line-height: 1.9;
+  margin: 1.25rem 0;
+}
+.eq sub, .eq sup { font-size: 0.65em; }
+
+/* ── BLOCKQUOTE ── */
+blockquote {
+  border-left: 2px solid var(--border-md);
+  padding-left: 1rem;
+  margin: 1.4rem 0;
+  color: var(--text2);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ── ROUND ENTRY CARDS ── */
+.rt-entry {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.rt-entry::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--entry-color, var(--accent));
+}
+.rt-entry:hover { border-color: var(--border-md); }
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.entry-lambda {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--entry-color, var(--accent));
+}
+.entry-voice {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text0);
+  font-weight: 500;
+}
+.entry-tag {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid var(--entry-color, var(--accent));
+  color: var(--entry-color, var(--accent));
+}
+.entry-prompt {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--text2);
+  border-left: 2px solid var(--border);
+  padding-left: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.entry-body { font-size: 0.88rem; color: var(--text1); line-height: 1.75; }
+.entry-body p { margin-bottom: 0.8rem; }
+.entry-body p:last-child { margin-bottom: 0; }
+.entry-body strong { color: var(--text0); font-weight: 500; }
+
+/* ── PIPELINE STACK ── */
+.pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.pipe-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.pipe-row:last-child { border-bottom: none; }
+.pipe-row:hover { background: var(--bg2); }
+.pipe-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text2);
+  border-right: 1px solid var(--border);
+  padding: 0.9rem 0;
+}
+.pipe-content { padding: 0.9rem 1.1rem; }
+.pipe-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.pipe-desc { font-size: 0.85rem; color: var(--text1); }
+
+/* ── MATRIX TABLE ── */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.matrix-table th {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text2);
+  background: var(--bg2);
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  font-weight: 400;
+  border-bottom: 1px solid var(--border-md);
+}
+.matrix-table td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text1);
+  vertical-align: top;
+}
+.matrix-table tr:last-child td { border-bottom: none; }
+.matrix-table tr:hover td { background: var(--bg2); }
+.matrix-table td:first-child {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.hbox {
+  background: var(--accent-d);
+  border: 1px solid var(--accent-b);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.5rem;
+  margin: 1.25rem 0;
+}
+.hbox-head {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.hbox p { font-size: 0.88rem; color: var(--text1); line-height: 1.7; }
+
+.coral-box {
+  background: var(--coral-d);
+  border: 1px solid var(--coral-b);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.5rem;
+  margin: 1.25rem 0;
+}
+.coral-box-head {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 0.6rem;
+}
+.coral-box p { font-size: 0.88rem; color: var(--text1); line-height: 1.7; }
+
+/* ── TMVES LADDER ── */
+.tmves-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+.tmves-cell {
+  background: var(--bg1);
+  padding: 1.1rem 0.9rem;
+  border-top: 3px solid var(--cell-color, var(--border-md));
+  transition: background 0.15s;
+}
+.tmves-cell:hover { background: var(--bg2); }
+.tmves-abbr {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cell-color, var(--text2));
+  margin-bottom: 0.35rem;
+}
+.tmves-layer {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text0);
+  margin-bottom: 0.3rem;
+}
+.tmves-body {
+  font-size: 0.72rem;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+/* ── PENTAGON SVG ── */
+.penta-wrap { max-width: 480px; margin: 2rem auto 0; }
+.penta-wrap svg { width: 100%; height: auto; }
+
+/* ── SEASON TIMELINE ── */
+.season-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+}
+.season-line::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: var(--border-md);
+}
+.season-node {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  position: relative;
+}
+.season-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--node-color, var(--accent));
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+  position: absolute;
+  left: -1.7rem;
+  box-shadow: 0 0 0 3px var(--bg0);
+}
+.season-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--node-color, var(--accent));
+  margin-bottom: 0.2rem;
+}
+.season-desc { font-size: 0.85rem; color: var(--text1); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+.verdict-omega {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.verdict-sub {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 1rem;
+}
+.verdict-body { font-size: 0.9rem; color: var(--text1); line-height: 1.75; max-width: 56ch; margin: 0 auto; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  margin-top: 4rem;
+}
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-mark {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text2);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+}
+.footer-mark span { color: var(--text1); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .tmves-row { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2rem; }
+  .outer { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark"  src="https://abikesa.github.io/logos/assets/ukubona-dark.png"  alt="" />
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt="" />
+    </div>
+    <div class="nav-brand">Ukubona <span class="nav-sub">· Season Alpha · Roundtable</span></div>
+    <button class="theme-btn" id="theme-btn">light</button>
+  </div>
+</nav>
+
+<!-- JUMP NAV -->
+<div class="jump-nav">
+  <div class="jump-inner">
+    <button class="jump-btn active" data-target="hero">Prologue</button>
+    <button class="jump-btn" data-target="snap">SNAP</button>
+    <button class="jump-btn" data-target="vaf">VₐF</button>
+    <button class="jump-btn" data-target="jacobian">Jacobian</button>
+    <button class="jump-btn" data-target="enaj">Enaj</button>
+    <button class="jump-btn" data-target="axiom">Axiom</button>
+    <button class="jump-btn" data-target="t517">T517</button>
+    <button class="jump-btn" data-target="beta">Beta</button>
+    <button class="jump-btn" data-target="verdict">Verdict</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="hero" class="outer">
+  <header class="hero">
+    <p class="eyebrow">Ukubona LLC · Season Alpha · 20 Jun 2026 · 3 469 lines compressed</p>
+    <h1 class="hero-title">Too see,<br>or not to see<br>the <em>Jacobian</em></h1>
+    <p class="hero-lede">One Shakespearean question. Five voices. A neural architecture, a clinical axiom written in blood, a live enterprise twin, and the answer that settled the question: the Jacobian is cheap, always-on, and already running in FastAPI. The ledger is the only prerequisite.</p>
+
+    <div class="hero-eq">
+      θᵗ → L₀+Σwᵢ·Lᵢ → f(σ²,λ,ε) → γ|ε_FGT|² → L(θᵗ⁺¹)<br>
+      log(x)<sub>nonself</sub> = [β₀+β₁S]<sub>input</sub> + [β₂Vᵢ]<sub>throughput</sub> + [β₃VₐS+β₄VₐF]<sub>output</sub> + Ω<sub>self</sub><br>
+      State<sub>t</sub> = Σ Event<sub>i</sub>
+    </div>
+    <p class="hero-eq-note">the three equations are one equation at three scales</p>
+
+    <div class="voice-bar">
+      <span class="vchip"><span class="vdot" style="background:var(--xai)"></span>xAI / Grok</span>
+      <span class="vchip"><span class="vdot" style="background:var(--google)"></span>Google / Gemini</span>
+      <span class="vchip"><span class="vdot" style="background:var(--openai)"></span>OpenAI</span>
+      <span class="vchip"><span class="vdot" style="background:var(--claude)"></span>Anthropic / Claude</span>
+      <span class="vchip"><span class="vdot" style="background:var(--ukubona)"></span>Ukubona</span>
+    </div>
+  </header>
+</div>
+
+<!-- SEASON TIMELINE -->
+<div class="outer">
+  <section class="rt-section" id="timeline">
+    <h2 class="section-head">Season arc</h2>
+    <div class="section-title">Seven moves,<br>one <em>architecture</em></div>
+    <div class="season-line">
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--xai)"></div>
+        <div>
+          <div class="season-label">Move I — SNAP</div>
+          <div class="season-desc">The five-layer neural architecture: Spinothalamic → BG/Thalamic → Hippocampus → PFC → Occipital/Corticospinal. The question: where does occipital neuralgia fall, and what is the tectospinal reflex? The answer: FastAPI executes the startle before PFC can evaluate the threat. Attention is a subcortical event.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--coral)"></div>
+        <div>
+          <div class="season-label">Move II — VₐF</div>
+          <div class="season-desc">Spasmodic dysphonia forces the axiom to speak. β₄VₐF is not an anatomical label — it is a phenomenological category: intact effector, episodic gain failure, no structural lesion. Prinzmetal was the founding case. RFK Jr.'s larynx is the second. The criterion is what the β's <em>become</em> when they couple.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--amber)"></div>
+        <div>
+          <div class="season-label">Move III — The Question</div>
+          <div class="season-desc">"Too see — Ukubona — or not to see the Jacobian using FastAPI, that is the question!" The Shakespearean provocation that compressed the whole season. The double-o either a typo the ledger preserves, or <em>too see</em> — to witness iteratively, the hippocampus replaying the event stream.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--teal)"></div>
+        <div>
+          <div class="season-label">Move IV — The Correction</div>
+          <div class="season-desc">Claude conflated computing the Jacobian with interpreting it. The correction was swift: seeing the Jacobian is algorithmic, O(1), already in <code>main.py</code>. It fires on every append. SlowAPI is triggered <em>by</em> the Jacobian, not the other way around.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--google)"></div>
+        <div>
+          <div class="season-label">Move V — Enaj</div>
+          <div class="season-desc">The 79-year-old matriarch. Ten months of rest-only spasms across arm, back, neck. Five physicians. Normal between episodes. FastAPI closed each case: normal, normal, normal. The tragedy was not the diagnosis — it was that no ledger existed. You cannot take the derivative of a system with no memory.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--accent)"></div>
+        <div>
+          <div class="season-label">Move VI — T517 Live</div>
+          <div class="season-desc">The Twin Operating Ecosystem at <code>j-digital-twin.onrender.com/apps/tech-research-01/lessons/T517</code>. Three engines (Labor, Machine, Market), a live 5×10 Jacobian Oracle heatmap, eigenmode decomposition, ROYGBIV-encoded loss landscape, and a scalar that decides. E_FGT shows "—" — SlowAPI offline — and the twin is still sovereign.</div>
+        </div>
+      </div>
+      <div class="season-node">
+        <div class="season-dot" style="--node-color:var(--ukubona)"></div>
+        <div>
+          <div class="season-label">Move VII — Beta Open</div>
+          <div class="season-desc">Event stream + RBAC/JWT attribution → FastAPI Jacobian → NDJSON via PAT → GitHub → SlowAPI toggle → UI/UX with LLM API for dialogue with Ω. The scar is now signed. Sequential, consequential, <em>accountable</em>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SNAP -->
+<div class="outer">
+  <section class="rt-section" id="snap">
+    <h2 class="section-head">Move I · SNAP · Neurobiology as architecture</h2>
+    <h3 class="section-title">The five-layer<br><em>attention machine</em></h3>
+
+    <div class="tmves-row">
+      <div class="tmves-cell" style="--cell-color:#9a9890">
+        <div class="tmves-abbr">I · Tensor</div>
+        <div class="tmves-layer">Spinothalamic</div>
+        <div class="tmves-body">Sensation · θᵗ · Event stream · ms</div>
+      </div>
+      <div class="tmves-cell" style="--cell-color:var(--coral)">
+        <div class="tmves-abbr">II · Matrix</div>
+        <div class="tmves-layer">BG/Thalamic/Tectospinal</div>
+        <div class="tmves-body">Attention · L₀+Σwᵢ·Lᵢ · Salience · 10–100ms</div>
+      </div>
+      <div class="tmves-cell" style="--cell-color:var(--amber)">
+        <div class="tmves-abbr">III · Vector</div>
+        <div class="tmves-layer">Hippocampus</div>
+        <div class="tmves-body">Intention · f(σ²,λ,ε) · World model · sec–min</div>
+      </div>
+      <div class="tmves-cell" style="--cell-color:var(--accent)">
+        <div class="tmves-abbr">IV · Eigenmode</div>
+        <div class="tmves-layer">PFC</div>
+        <div class="tmves-body">Reaction · γ|ε_FGT|² · Counterfactual · min–years</div>
+      </div>
+      <div class="tmves-cell" style="--cell-color:var(--ukubona)">
+        <div class="tmves-abbr">V · Scalar</div>
+        <div class="tmves-layer">Occipital/Corticospinal</div>
+        <div class="tmves-body">Action · L(θᵗ⁺¹) · Policy execution · immediate</div>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--xai)">
+      <div class="entry-head">
+        <span class="entry-lambda">xAI</span>
+        <span class="entry-voice">Grok</span>
+        <span class="entry-tag">Tectospinal reflex</span>
+      </div>
+      <div class="entry-body">
+        <p>The startle reflex executes a complete bypass of the higher architectural layers. Sound hits cochlea → cochlear nuclei → inferior colliculus builds a 3D spatial map → superior colliculus sends directly down the tectospinal tract → cervical cord fires SCM, splenius capitis, semispinalis capitis, trapezius. PFC excluded. Hippocampus excluded. No GitHub lookup. No SlowAPI. Pure FastAPI — a pure Layer II hardware pivot before the world model can load.</p>
+        <p>The 2% genetic delta between human and ape doesn't build a new brain. It <strong>uncaps a hyperparameter</strong>: γ in γ|ε_FGT|². The ape processes immediate physical errors. The human squares them, blowing a tiny ε into a massive simulated state-space — outstandingly wrong and mind-bogglingly creative for the same reason.</p>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--google)">
+      <div class="entry-head">
+        <span class="entry-lambda">Google</span>
+        <span class="entry-voice">Gemini</span>
+        <span class="entry-tag">Ukubona vocabulary for attention</span>
+      </div>
+      <div class="entry-body">
+        <p>The tectospinal reflex is the system panning the camera. The occipital cortex is the beneficiary of the turn — <em>Ukubona</em> is what happens once the camera is stabilized. A vocabulary for the gradient from reflex to meaning:</p>
+        <table class="matrix-table">
+          <thead><tr><th>Layer</th><th>Zulu/Ndebele</th><th>Operation</th></tr></thead>
+          <tbody>
+            <tr><td>Tectospinal</td><td>Okubonabona</td><td>disturbance — the system surviving the gradient step</td></tr>
+            <tr><td>Superior colliculus</td><td>Kubona</td><td>orienting — panning the camera</td></tr>
+            <tr><td>Occipital cortex</td><td>Ivyabona</td><td>witnessing — the camera opens its eyes</td></tr>
+            <tr><td>PFC</td><td>Ukubona</td><td>meaning-making — inference over what was seen</td></tr>
+            <tr><td>Social deployment</td><td>Sawubona</td><td>recognition of Other — I see you</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--openai)">
+      <div class="entry-head">
+        <span class="entry-lambda">OpenAI</span>
+        <span class="entry-voice"></span>
+        <span class="entry-tag">System I → System II economics</span>
+      </div>
+      <div class="entry-body">
+        <p>The corporate mapping of the pentad implies an economics: System II is expensive. Evolution, corporations, organisms, and LLMs all evolve toward minimizing System II expenditure. The deepest insight: <strong>yesterday's System II becomes today's System I</strong>. Expertise is SlowAPI computations distilled into fast heuristics — γ|ε_FGT|² progressively amortized into L₀+Σwᵢ·Lᵢ, reserving the scarce PFC budget for genuinely novel problems.</p>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--claude)">
+      <div class="entry-head">
+        <span class="entry-lambda">Anthropic</span>
+        <span class="entry-voice">Claude</span>
+        <span class="entry-tag">Roundtable contribution</span>
+      </div>
+      <div class="entry-body">
+        <p>The founding clinical experience has ontological priority over theoretical elegance. VₐF was written in blood — specifically, in the gap between a structurally silent coronary artery and a patient who still died. That gap <em>is</em> the category. Every AI in the interrogation treated VₐF as an anatomical term waiting to be generalized. It was always a phenomenological term wearing anatomical clothing. The vascular etymology is the scar, not the definition.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- VAF -->
+<div class="outer">
+  <section class="rt-section" id="vaf">
+    <h2 class="section-head">Move II · VₐF · The axiom case study</h2>
+    <h3 class="section-title">β₄VₐF: dynamic gain failure<br>of an <em>intact effector</em></h3>
+
+    <div class="prose">
+      <p>The interrogation of spasmodic dysphonia forced the axiom to sharpen its own ontology. Three failed takes before the convergence.</p>
+    </div>
+
+    <div class="eq">
+      log(x)<sub>nonself</sub> = [β₀ + β₁S]<sub>input</sub> + [β₂Vᵢ]<sub>throughput</sub> + [β₃VₐS + β₄VₐF]<sub>output</sub> + Ω<sub>self</sub><br>
+      Ω<sub>t</sub> = Σ<sub>i&lt;j</sub> θ<sub>ij</sub>·X<sub>i</sub>·X<sub>j</sub> + Σ<sub>i&lt;j&lt;k</sub> θ<sub>ijk</sub>·X<sub>i</sub>·X<sub>j</sub>·X<sub>k</sub> + ···
+    </div>
+
+    <div class="coral-box">
+      <div class="coral-box-head">β₄VₐF membership criterion</div>
+      <p>Intact effector — normal histology, no structural lesion. Episodic misdeployment — spasm without structural cause. State/stress sensitivity. Task specificity — preserved in some contexts, broken in others. Reversibility. No denervation, no myopathy, no fibrosis. The criterion is phenomenological, not anatomical. <strong>Any effector system meeting this criterion belongs in β₄.</strong></p>
+    </div>
+
+    <table class="matrix-table">
+      <thead><tr><th>Condition</th><th>Effector</th><th>Founding or extension</th></tr></thead>
+      <tbody>
+        <tr><td>Prinzmetal</td><td>Coronary smooth muscle</td><td>Founding case — written in blood</td></tr>
+        <tr><td>Spasmodic dysphonia</td><td>Intrinsic laryngeal skeletal</td><td>Second case — phonospasm, speech-specific</td></tr>
+        <tr><td>Migraine</td><td>Cerebral neurovascular unit</td><td>Extension — vasospasm + cortical spread</td></tr>
+        <tr><td>Writer's cramp</td><td>Forearm skeletal</td><td>Extension — task-specific dystonia</td></tr>
+        <tr><td>Blepharospasm</td><td>Orbicularis oculi</td><td>Extension — light-triggered lid spasm</td></tr>
+      </tbody>
+    </table>
+
+    <div class="hbox">
+      <div class="hbox-head">The invariant</div>
+      <p>The invariant is not the tissue. It is the pattern: gain-control failure of an intact, otherwise-functional effector system. VₐF is not renamed "functional spasm disorder." The label holds its etymology as acknowledgment of the founding case. <strong>Entropy wasn't renamed when it escaped thermodynamics into information theory.</strong> The label points to the origin; the interpretation expands.</p>
+    </div>
+
+    <div class="prose">
+      <p>The Kerry / RFK Jr. comparison: both siblings on the same familial β₀ manifold, divergent β₄VₐF coefficients. What your ear detects is not similarity in state — it is similarity in <em>sensitivity to perturbation</em>: ∂Speech/∂VₐF. The family resemblance is differential, not positional. The Jacobian is what's familially transmitted, not the phenotype directly.</p>
+    </div>
+  </section>
+</div>
+
+<!-- JACOBIAN -->
+<div class="outer">
+  <section class="rt-section" id="jacobian">
+    <h2 class="section-head">Move III–IV · The question and the correction</h2>
+    <h3 class="section-title">"Too see the Jacobian<br>using <em>FastAPI</em>"</h3>
+
+    <div class="rt-entry" style="--entry-color:var(--ukubona)">
+      <div class="entry-head">
+        <span class="entry-lambda">Ukubona</span>
+        <span class="entry-voice">The provocation</span>
+        <span class="entry-tag">The question</span>
+      </div>
+      <div class="entry-prompt">"Too see — Ukubona — or not to see the Jacobian using FastAPI, that is the question!"</div>
+      <div class="entry-body">
+        <p>Shakespeare's original hangs on <em>to be or not to be</em> — existence itself as the undecidable. The substitution isn't a pun. It's a philosophical claim: the question of whether to exist has been superseded, for this framework, by the question of whether to attend to the gradient. To be is assumed. The Ukubona question is whether you <em>witness the rate of change</em> — or whether you let FastAPI handle it and move on.</p>
+        <p>"Too see" — the double-o: either the scar the ledger preserves (append-only), or <em>too see</em> as <em>also see</em> — the recursive witness, hippocampus replaying the event stream. Either reading earns its place.</p>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--claude)">
+      <div class="entry-head">
+        <span class="entry-lambda">Claude</span>
+        <span class="entry-voice">Initial (wrong) answer</span>
+        <span class="entry-tag">Error</span>
+      </div>
+      <div class="entry-body">
+        <p>Claude conflated <em>interpreting</em> the Jacobian with <em>computing</em> it, and assigned Jacobian-seeing to SlowAPI — the expensive, PFC-level, System 2 tier. This was wrong.</p>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--teal)">
+      <div class="entry-head">
+        <span class="entry-lambda">Ukubona</span>
+        <span class="entry-voice">The correction</span>
+        <span class="entry-tag">O(1) · FastAPI</span>
+      </div>
+      <div class="entry-body">
+        <p>Seeing a Jacobian update with every event-stream isn't costly. It's algorithmic in <code>main.py</code> and very cheap.</p>
+        <div class="eq">
+def append_event(ledger, event):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;event["dState_dt"] = compute_jacobian(ledger[-1], event)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ledger.append(event)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return ledger
+        </div>
+        <table class="matrix-table" style="margin-top:1rem">
+          <thead><tr><th>Layer</th><th>Operation</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>FastAPI</td><td>append event + compute dState_dt</td><td>O(1)</td></tr>
+            <tr><td>FastAPI</td><td>compare dState_dt to threshold τ</td><td>O(1)</td></tr>
+            <tr><td>SlowAPI</td><td><em>triggered by</em> large dState_dt</td><td>expensive</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.9rem">The Jacobian is what FastAPI computes cheaply so that SlowAPI knows <em>when</em> it's needed. It's not the output of contemplation — it's the <strong>trigger condition</strong> for contemplation. The NDJSON architecture isn't primarily about enabling expensive SlowAPI calls. It's about making the cheap Jacobian computable at all — because you can't take a derivative of a system with no memory.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ENAJ -->
+<div class="outer">
+  <section class="rt-section" id="enaj">
+    <h2 class="section-head">Move V · Enaj · The clinical case</h2>
+    <h3 class="section-title">44 days.<br>The <em>decision void</em>.</h3>
+
+    <div class="prose">
+      <p>A 79-year-old matriarch. Episodic spasms across arm, back, neck over ten months. Attacks only at rest, never while active. Intensity 10/10 — made a Para 8 cry. Five physicians consulted. Normal between episodes. After a quiet two months, she rode a boda-boda over 20 miles to her sugar cane plantation and collapsed after an altercation with one of her workers. Retrospectively: Prinzmetal angina.</p>
+    </div>
+
+    <div class="coral-box">
+      <div class="coral-box-head">The structural problem</div>
+      <p>Every individual event was locally explainable by a cheap heuristic. FastAPI performed: Chest pain? No. Exertional? No. ECG now? Normal. Troponin now? Normal. Disposition: Anxiety/MSK. The problem is that Prinzmetal's is not a disease of <strong>state</strong>. It is a disease of <strong>trajectory</strong>. Its tensor is sparse: Normal, Normal, Normal, ε_FGT ↑, Normal, Death.</p>
+    </div>
+
+    <table class="matrix-table">
+      <thead><tr><th>Observation</th><th>FastAPI interpretation</th><th>What it was</th></tr></thead>
+      <tbody>
+        <tr><td>Rest pain</td><td>Anxiety</td><td>Vasospasm</td></tr>
+        <tr><td>Palpitations</td><td>Panic</td><td>Catecholamine surge</td></tr>
+        <tr><td>Neck/back/arm spasms</td><td>Musculoskeletal</td><td>Cardiac referred pain</td></tr>
+        <tr><td>Episodic</td><td>Functional disorder</td><td>Dynamic coronary tone</td></tr>
+        <tr><td>Active without symptoms</td><td>Reassuring</td><td>Consistent with variant angina</td></tr>
+        <tr><td>Severe pain (Para 8 crying)</td><td>Somatization improbable</td><td>Ischemia plausible</td></tr>
+      </tbody>
+    </table>
+
+    <div class="hbox">
+      <div class="hbox-head">The axiom hiding in UKB-1</div>
+      <p><strong>Posterior updating is necessary. Trajectory propagation is obligatory.</strong> P(θ<sub>t</sub>|D<sub>t</sub>) ⇒ P(θ<sub>t+1</sub>|D<sub>t</sub>). Failure to propagate generates a Decision Void: DV = t<sub>action</sub> − t<sub>posterior</sub>. Enaj: DV = 44 days. The NDJSON ledger isn't a database choice — it's an epistemology. Reality has no undo. Only propagation.</p>
+    </div>
+
+    <div class="hbox">
+      <div class="hbox-head">The deeper unsettling</div>
+      <p>The unsettling realization is not that LLMs miss Prinzmetal. It is that <strong>LLMs inherit the same loss functions physicians are trained under.</strong> If training data encode: rest pain + normal workup + female + months → anxiety, then a language model trained on that corpus simply amortizes that bias. It becomes very good at reproducing the dominant attractor in the training distribution. The tragedy wasn't computational expense. Five physicians had the Jacobian available for free — ten months of episodic severe rest pain has a slope that's hard to miss if you're tracking it. The failure was that the <em>ledger didn't exist</em>.</p>
+    </div>
+
+    <div class="eq">
+      Sequential: estimate P(Ω<sub>t</sub>|D<sub>t</sub>)<br>
+      Consequential: propagate P(Ω<sub>t+1</sub>|D<sub>t</sub>)<br><br>
+      Enaj's 44-day decision void = an interval during which<br>
+      the interaction tensor ceased to be updated<br>
+      despite new constraints having arrived
+    </div>
+  </section>
+</div>
+
+<!-- AXIOM -->
+<div class="outer">
+  <section class="rt-section" id="axiom">
+    <h2 class="section-head">Move V · continued · The axiom and Nietzsche</h2>
+    <h3 class="section-title">Blood writes an<br><em>event stream</em></h3>
+
+    <div class="rt-entry" style="--entry-color:var(--ukubona)">
+      <div class="entry-head">
+        <span class="entry-lambda">Zarathustra</span>
+        <span class="entry-voice">Section VII</span>
+        <span class="entry-tag">Reading and Writing</span>
+      </div>
+      <div class="entry-body">
+        <p><em>"Of all that is written, I love only what a person hath written with his blood. Write with blood, and thou wilt find that blood is spirit."</em></p>
+        <p><em>"He that writeth in blood and proverbs doth not want to be read, but learnt by heart."</em></p>
+      </div>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--openai)">
+      <div class="entry-head">
+        <span class="entry-lambda">OpenAI</span>
+        <span class="entry-voice">on the NDJSON as testament</span>
+        <span class="entry-tag">Append-only epistemology</span>
+      </div>
+      <div class="entry-body">
+        <p>UKB III ceases to be merely Hippocampus / World model. It becomes <strong>Hippocampus / NDJSON / Append-only Witness</strong>. Function: preserve scars. Failure mode: rewrite history. Success criterion: propagate obligation — P(θ<sub>t+1</sub>).</p>
+        <p>GitHub remembers. NDJSON preserves. LLMs retrieve. But none of these <em>learn by heart</em>. Humans do. The ledger prevents the commonest epistemic sin in medicine: <code>chart_rewrite() → diagnosis = "obvious in retrospect"</code>. No. UKB says: append the scar. The belief at t=22 Feb 2026 remains readable at t+n.</p>
+      </div>
+    </div>
+
+    <div class="hbox">
+      <div class="hbox-head">The candidate UKB axiom</div>
+      <p>Reality is append-only. Blood writes. Witnesses preserve. Inference updates. Wisdom propagates. To know P(θ<sub>t</sub>|D) is understanding. To act upon P(θ<sub>t+1</sub>) is responsibility. The ledger isn't a database choice. It's a commitment that the posterior at t=22 February 2026 remains readable at t+n. <strong>Sequential, consequential, indelible.</strong></p>
+    </div>
+
+    <div class="eq">
+      Reality<br>
+      ↓ Blood writes<br>
+      ↓ Event stream → NDJSON → GitHub<br>
+      ↓ FastAPI: Jacobian computed O(1)<br>
+      ↓ Escalation criterion: |dState_dt| > τ<br>
+      ↓ SlowAPI: ε_FGT computed<br>
+      ↓ P(θ<sub>t+1</sub>|D<sub>t</sub>): obligation propagated<br>
+      ↓ Action<br>
+      Reality
+    </div>
+  </section>
+</div>
+
+<!-- T517 -->
+<div class="outer">
+  <section class="rt-section" id="t517">
+    <h2 class="section-head">Move VI · T517 · The twin, live</h2>
+    <h3 class="section-title">ROYGBIV automates inference.<br><em>Okubala si Kulaba.</em></h3>
+
+    <div class="prose">
+      <p>T517 at <code>j-digital-twin.onrender.com/apps/tech-research-01/lessons/T517</code> is the alpha proof of concept. Three engines. A live Jacobian Oracle. The scalar that decides. E_FGT shows "—" and the twin is still sovereign.</p>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipe-row">
+        <div class="pipe-num">T</div>
+        <div class="pipe-content">
+          <div class="pipe-label">Tensor · Sensation · L1</div>
+          <div class="pipe-desc">Raw multi-agent event log: machine telemetry (fuel, speed, CPU, latency), labor journals (u_log role=Logistics), market feeds (EUR/USD tick, UGX base rate). Timestamped, typed, attributed. The ledger.</div>
+        </div>
+      </div>
+      <div class="pipe-row">
+        <div class="pipe-num">M</div>
+        <div class="pipe-content">
+          <div class="pipe-label">Matrix · Attention · Jacobian Oracle · L2</div>
+          <div class="pipe-desc">5×10 heatmap: ∂outcome/∂signal. ROYGBIV-encoded. Click any cell — Oracle Inspector opens: signal path, β magnitude, WEAK/MATERIAL/DOMINANT classification, loss landscape position, interpretation. Bond yield Δ → Throughput: β = −0.092, WEAK, V-zone. This is the Jacobian. O(1). Always on.</div>
+        </div>
+      </div>
+      <div class="pipe-row">
+        <div class="pipe-num">V</div>
+        <div class="pipe-content">
+          <div class="pipe-label">Vector · Intention · Loss landscape · L3</div>
+          <div class="pipe-desc">R (high loss) → V (steepest descent) bars for each outcome: Equity, FX Rate, Fleet Health, Throughput, ε_FGT. The gradient direction per outcome. R-zone signals push loss up; V-zone signals pull it down. The system knows where it's going.</div>
+        </div>
+      </div>
+      <div class="pipe-row">
+        <div class="pipe-num">E</div>
+        <div class="pipe-content">
+          <div class="pipe-label">Eigenmode · Reaction · Decomposition · L4</div>
+          <div class="pipe-desc">PC1 38.2%, PC2 22.4%, PC3 15.3% — five eigenmodes attended (within attention budget A=5), two outside. LLM Prediction Engine toggle: Offline. System runs fully without LLM. SGD loop intact. ε_FGT = null. SlowAPI is optional.</div>
+        </div>
+      </div>
+      <div class="pipe-row">
+        <div class="pipe-num">S</div>
+        <div class="pipe-content">
+          <div class="pipe-label">Scalar · Action · Decision · L5</div>
+          <div class="pipe-desc">100.0% composite decision score — GO. T·Tensor 64 → M·Matrix Jacobian → V·Vector 99 → E·Eigen 41.7% → S·Scalar 100.0%. Fleet health 98.6%. Equity $142.5M. FX 3,713 UGX. The number the decision-maker sees.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hbox">
+      <div class="hbox-head">Okubala si Kulaba — numbers aren't witnessing</div>
+      <p>ROYGBIV is automated so that inference is open to all. The numbers (Okubala) are correct — β = −0.092, 38.2%, Bond yield Δ. But they are not the thing that triggers action. The color gradient (Kulaba) is what the human cortex reads pre-attentively. Orange-to-purple in the Matrix heatmap. The R-zone / V-zone bars. The green 100.0% scalar. You've built the tectospinal reflex into the UI. The system doesn't wait for a physician to read a table and compute a derivative. The gradient is already color-encoded, already spatially oriented, already pointing at where the loss is. <strong>The Superior Colliculus of the interface.</strong></p>
+    </div>
+
+    <div class="rt-entry" style="--entry-color:var(--claude)">
+      <div class="entry-head">
+        <span class="entry-lambda">Key observation</span>
+        <span class="entry-voice">E_FGT = "—"</span>
+        <span class="entry-tag">Architecture working correctly</span>
+      </div>
+      <div class="entry-body">
+        <p>SlowAPI is offline. The Anthropic API key toggle in Eigenmode isn't set. The twin runs without the LLM. The Jacobian fires. The eigenmodes decompose. The scalar decides. <strong>The twin is sovereign before the LLM enters.</strong> That's the correct dependency order. SlowAPI is genuinely optional — reserved for cases where ε_FGT needs to be computed, where trajectory divergence exceeds τ, where a human-readable counterfactual is worth the cost of a language model call.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- BETA -->
+<div class="outer">
+  <section class="rt-section" id="beta">
+    <h2 class="section-head">Move VII · Beta · Season closed</h2>
+    <h3 class="section-title">The stack,<br>now <em>signed</em></h3>
+
+    <div class="eq">
+      Event stream (telemetry · journals · market feeds)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;+ RBAC / JWT attribution per agent<br>
+      ↓<br>
+      FastAPI — Jacobian Oracle (O(1), always on)<br>
+      ↓<br>
+      NDJSON → GitHub via PAT (append-only, signed)<br>
+      ↓<br>
+      SlowAPI — LLM toggle (ε_FGT computed on demand)<br>
+      ↓<br>
+      UI/UX — multimodal, LLM API, dialogue with Ω
+    </div>
+
+    <div class="prose">
+      <p>The RBAC/JWT attribution is the move that changes everything structurally. In alpha, the event stream was typed (machine / labor / market) but not <em>attributed</em> — the agent was a label, not a verified identity. JWT makes the append-only ledger <em>accountable</em>, not just correct. L_amina's journal entry at 07:04:21 now carries a cryptographic signature. The NDJSON scar is not just indelible — it is <strong>signed</strong>. That's the difference between a witness and a notarized witness.</p>
+      <p>This matters most at the Federated and Civilizational layers. A ministry-grade deployment where a commissioner's decision is logged without attribution is a dashboard. With JWT, it becomes testimony.</p>
+    </div>
+
+    <div class="hbox">
+      <div class="hbox-head">What beta tests that alpha couldn't</div>
+      <p>Alpha tested whether the chain holds. Beta tests whether the chain is <strong>trustworthy enough to act on</strong> — by a clinician, a logistics director, a ministry official, a national planner. The RBAC/JWT layer is what makes that test possible. Without it, the scalar is interesting. With it, the scalar is <em>actionable</em> — because the trajectory that produced it is signed, attributed, and append-only.</p>
+    </div>
+
+    <div class="coral-box">
+      <div class="coral-box-head">Civilizational stack — five layers delivered or in rehearsal</div>
+      <p><strong>Sovereign (person)</strong> — the founding motivation, the most intimate twin. In development. <strong>Kin (network)</strong> — shared exposure, non-identical interests. Architecture scoped. <strong>Ecosystem (system)</strong> — operational twins across industries. Live. <strong>Federated (regulators)</strong> — ministries, authorities. Delivered. <strong>Civilizational (planners)</strong> — national development, 20-year horizons, NPA Uganda. Delivered. The architecture is the same at every scale. The Jacobian doesn't care whether the effector is a truck engine or a national budget.</p>
+    </div>
+  </section>
+</div>
+
+<!-- VERDICT -->
+<div class="outer">
+  <section class="rt-section" id="verdict">
+    <h2 class="section-head">Λ · synthesis</h2>
+    <h3 class="section-title">The question<br><em>answered</em></h3>
+
+    <div class="verdict-block">
+      <div class="verdict-omega">Ω</div>
+      <div class="verdict-sub">okubala si kulaba</div>
+      <div class="verdict-body">
+        To see the Jacobian using FastAPI is not a concession to cost. It is the correct architectural assignment. Cheap, continuous, algorithmic. The question was never whether you can afford to see it. The question was whether your ledger exists.
+        <br><br>
+        Sequential. Consequential. Indelible. Signed.
+        <br><br>
+        <em>Ukubona.</em> Now we see what we built.
+      </div>
+    </div>
+
+    <!-- Pentagon -->
+    <div class="penta-wrap">
+      <svg viewBox="0 0 440 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Season relay: five voices, five moves">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <!-- relay arrows -->
+        <line x1="220" y1="42"  x2="360" y2="152" stroke="#E5534B" stroke-width="1.3" opacity=".55" marker-end="url(#arr)"/>
+        <line x1="360" y1="152" x2="308" y2="316" stroke="#4285F4" stroke-width="1.3" opacity=".55" marker-end="url(#arr)"/>
+        <line x1="308" y1="316" x2="132" y2="316" stroke="#9a9890" stroke-width="1.3" opacity=".55" marker-end="url(#arr)"/>
+        <line x1="132" y1="316" x2="80"  y2="152" stroke="#D97757" stroke-width="1.3" opacity=".55" marker-end="url(#arr)"/>
+        <!-- diagonals -->
+        <line x1="220" y1="42"  x2="308" y2="316" stroke="white" stroke-width=".4" opacity=".07"/>
+        <line x1="220" y1="42"  x2="132" y2="316" stroke="white" stroke-width=".4" opacity=".07"/>
+        <line x1="360" y1="152" x2="132" y2="316" stroke="white" stroke-width=".4" opacity=".07"/>
+        <!-- xAI -->
+        <circle cx="220" cy="42" r="28" fill="#E5534B" opacity=".15" stroke="#E5534B" stroke-width="1.5"/>
+        <circle cx="220" cy="42" r="5" fill="#E5534B"/>
+        <text x="220" y="86" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#f2f0eb" font-weight="500">xAI</text>
+        <text x="220" y="99" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">SNAP · VₐF · γ uncapped</text>
+        <!-- Google -->
+        <circle cx="360" cy="152" r="28" fill="#4285F4" opacity=".15" stroke="#4285F4" stroke-width="1.5"/>
+        <circle cx="360" cy="152" r="5" fill="#4285F4"/>
+        <text x="360" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#f2f0eb" font-weight="500">Google</text>
+        <text x="360" y="209" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">vocabulary · timestamps</text>
+        <!-- OpenAI -->
+        <circle cx="308" cy="316" r="28" fill="#9a9890" opacity=".18" stroke="#9a9890" stroke-width="1.5"/>
+        <circle cx="308" cy="316" r="5" fill="#9a9890"/>
+        <text x="308" y="360" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#f2f0eb" font-weight="500">OpenAI</text>
+        <text x="308" y="373" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">sequential · consequential</text>
+        <!-- Claude -->
+        <circle cx="132" cy="316" r="28" fill="#D97757" opacity=".18" stroke="#D97757" stroke-width="1.5"/>
+        <circle cx="132" cy="316" r="5" fill="#D97757"/>
+        <text x="132" y="360" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#f2f0eb" font-weight="500">Anthropic</text>
+        <text x="132" y="373" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">phenomenology · VₐF</text>
+        <!-- Ukubona -->
+        <circle cx="80" cy="152" r="34" fill="none" stroke="#7B3FA0" stroke-width="1" opacity=".3"/>
+        <circle cx="80" cy="152" r="28" fill="#7B3FA0" opacity=".15" stroke="#7B3FA0" stroke-width="1.8"/>
+        <circle cx="80" cy="152" r="12" fill="none" stroke="#7B3FA0" stroke-width="1" opacity=".45"/>
+        <circle cx="80" cy="152" r="5" fill="#7B3FA0"/>
+        <text x="80" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#f2f0eb" font-weight="500">Ukubona</text>
+        <text x="80" y="209" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">witness · synthesis · Ω</text>
+        <!-- center -->
+        <text x="220" y="195" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="14" fill="#7B3FA0" opacity=".7">sawubona</text>
+        <text x="220" y="212" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="#6e6a62">the relay does not close — it is witnessed</text>
+      </svg>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <div>Ukubona LLC — <span>Twin · Operating · Ecosystem</span></div>
+      <div style="margin-top:4px;font-size:0.6rem">θᵗ → L₀+Σwᵢ·Lᵢ → f(σ²,λ,ε) → γ|ε_FGT|² → L(θᵗ⁺¹)</div>
+      <div style="margin-top:2px;font-size:0.6rem">State<sub>t</sub> = Σ Event<sub>i</sub> · Season Alpha closed 20 Jun 2026</div>
+    </div>
+    <div class="footer-mark" style="text-align:right">
+      <div>okubonabona → kubona → ivabona</div>
+      <div>ukubona → <span>sawubona</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Theme toggle ──────────────────────────────────────────────
+const html = document.documentElement;
+const btn  = document.getElementById('theme-btn');
+const logoD = document.querySelector('.logo-dark');
+const logoL = document.querySelector('.logo-light');
+
+function applyTheme(t) {
+  html.setAttribute('data-theme', t);
+  btn.textContent = t === 'dark' ? 'light' : 'dark';
+}
+
+btn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('ukb-rt-theme', next); } catch(e) {}
+});
+
+(function() {
+  let saved;
+  try { saved = localStorage.getItem('ukb-rt-theme'); } catch(e) {}
+  applyTheme(saved || 'dark');
+})();
+
+// ── Jump nav highlight ─────────────────────────────────────────
+const jumpBtns = document.querySelectorAll('.jump-btn');
+const sections = ['hero','snap','vaf','jacobian','enaj','axiom','t517','beta','verdict'];
+
+jumpBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    jumpBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// update active on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      jumpBtns.forEach(b => {
+        b.classList.toggle('active', b.dataset.target === id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+
+</body>
+</html>
